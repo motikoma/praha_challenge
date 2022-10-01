@@ -1,7 +1,7 @@
 # jestで単体テストを書こう
 
 ## 課題2（実装）
-課題を反映したコードは下記に格納
+課題を反映したコードは下記に格納<br>
 https://github.com/motikoma/praha-challenge-templates/blob/master/jestSample/functions.ts 
 
 ## 課題3（質問）
@@ -26,8 +26,8 @@ https://github.com/motikoma/praha-challenge-templates/blob/master/jestSample/fun
 * 統合テスト: モジュールを組み合わせたテスト
 
 ### sumOfArrayに空の配列を渡すと例外が発生する場合の修正
-プロダクトコード: https://github.com/motikoma/praha-challenge-templates/blob/master/jestSample/functions.ts 
-テストコード: https://github.com/motikoma/praha-challenge-templates/blob/master/jestSample/__tests__/functions.test.ts 
+* プロダクトコード: https://github.com/motikoma/praha-challenge-templates/blob/master/jestSample/functions.ts
+* テストコード: https://github.com/motikoma/praha-challenge-templates/blob/master/jestSample/__tests__/functions.test.ts 
 
 
 ### Property Based Testing について
