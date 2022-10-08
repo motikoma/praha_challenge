@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { Board, BoardState } from "./Board"
-import { calculateWinner } from "./calculateWinner"
+import { Board, BoardState } from "../board/Index";
+import { calculateWinner } from "./calculateWinner";
+import './game.css';
 
 type Step = {
     readonly squares: BoardState,

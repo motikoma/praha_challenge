@@ -1,4 +1,4 @@
-import { BoardState } from "./Board"
+import { BoardState } from "../board/Index"
 
 export const calculateWinner = (squares: BoardState) => {
     const lines = [
@@ -21,5 +21,5 @@ export const calculateWinner = (squares: BoardState) => {
             return squares[a]
         }
     }
-    return null
+    return null;
 }

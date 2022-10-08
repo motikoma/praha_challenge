@@ -1,11 +1,12 @@
 import { Repeat } from 'typescript-tuple'
-import { Square, SquareState } from './Square';
+import { Square, SquareState } from '../square/Index';
+import "./board.css";
 
 export type BoardState = Repeat<SquareState, 9>;
 
 type BoardProps = {
-    squares: BoardState
-    onClick: (i: number) => void
+    squares: BoardState;
+    onClick: (i: number) => void;
 }
 
 export const Board: React.FC<BoardProps> = (props) => {

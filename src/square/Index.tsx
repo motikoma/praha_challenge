@@ -1,6 +1,7 @@
 import React from "react";
+import "./square.css"
 
-export type SquareState = 'O' | 'X' | null;
+export type SquareState = 'O' | 'X' | '▲' | null;
 
 type SquareProps = {
     value: SquareState;
