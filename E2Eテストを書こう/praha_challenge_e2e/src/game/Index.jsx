@@ -19,7 +19,10 @@ export const Game = () => {
 
     if(winner){
         status = `Winner: ${winner}`
-    } else {
+    } else if(state.stepNumber === 9){
+        status = `Draw!`
+    }
+    else {
         status = `Next player: ${current.xIsNext ? 'X' : 'O'}`
     }
 
@@ -68,7 +71,7 @@ export const Game = () => {
                 <Board squares={current.squares} onClick={handleClick} />
             </div>
             <div className='game-info'>
-                <div>{status}</div>
+                <div data-e2e='status'>{status}</div>
                 <ol>{moves}</ol>
             </div>
         </div>

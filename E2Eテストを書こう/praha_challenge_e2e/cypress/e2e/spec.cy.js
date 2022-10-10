@@ -1,10 +1,25 @@
-describe('My First Test', () => {
-  it('Does not do much!', () => {
+describe('マルバツゲームの勝敗判定', () => {
+  it('片方のプレイヤーが勝つと勝利メッセージが表示される', () => {
     cy.visit('http://localhost:3001')
     cy.get('[data-e2e="square-0"]').click()
     cy.get('[data-e2e="square-4"]').click()
     cy.get('[data-e2e="square-1"]').click()
     cy.get('[data-e2e="square-5"]').click()
     cy.get('[data-e2e="square-2"]').click()
+    cy.get('[data-e2e="status"]').contains('Winner: X')
+  })
+
+  it('勝敗がつかないと引き分けメッセージが表示される', () => {
+    cy.visit('http://localhost:3001')
+    cy.get('[data-e2e="square-0"]').click()
+    cy.get('[data-e2e="square-3"]').click()
+    cy.get('[data-e2e="square-1"]').click()
+    cy.get('[data-e2e="square-4"]').click()
+    cy.get('[data-e2e="square-5"]').click()
+    cy.get('[data-e2e="square-2"]').click()
+    cy.get('[data-e2e="square-6"]').click()
+    cy.get('[data-e2e="square-7"]').click()
+    cy.get('[data-e2e="square-8"]').click()
+    cy.get('[data-e2e="status"]').contains('Draw!')
   })
 })
