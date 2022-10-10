@@ -20,7 +20,7 @@
     * APIや状態管理ライブラリから取得したデータをそれぞれのPresentational Componentに渡す
     * Container Componentで使用するPresentational Component以外で独自で要素をレンダリングすることはなくスタイルを持つこともない
 
-hooksによるContainer/Presentationalパターンの置き換えについて
+### hooksによるContainer/Presentationalパターンの置き換えについて
 * コンポーネントの再利用性やテストの容易性を考えるとhooksとContainer/Presentationalパターンを組み合わせた方が良い
     * hooksにロジックを抽出したとしてもhooksを呼び出しているコンポーネントがhooksに依存する
 * hooksを呼び出すコンポーネントをContainerコンポーネントとして扱う
@@ -69,6 +69,7 @@ hooksによるContainer/Presentationalパターンの置き換えについて
     * 統合テスト
         * 一通りのAPIに対し実装することで意図せぬ不具合を予防してリファクタリング可能にする
         * アーキテクチャ変更と共に減らしていく
+        * オプション：E2Eテストが担保するというパターンもあり。その場合は統合テストは不要
 * E2Eテスト
     * 新規開発と同様
 
@@ -82,11 +83,11 @@ hooksによるContainer/Presentationalパターンの置き換えについて
 * ただし、DOMの構造を変更するときはカスタムデータ属性を付け直す必要がある
 
 ## 課題3（課題）
-残念ながらCypress Studioは今後提供されなくなるようです...
+残念ながらCypress Studioは今後提供されなくなるようです...<br>
 https://www.cypress.io/blog/2022/05/18/update-on-cypress-studio/ 
 
 ## 課題4（クイズ）
-E2Eテストの作成を自動化してくれる便利なツールが最近増えつつあります。
+E2Eテスト作成,保守を効率化してくれる便利なツールが最近増えつつあります。
 下記のツールのうちどれか1つを選んで、CypressなどのE2Eテストツールと比較したメリデメを考えてみてください。
 * MagicPod
 * mabl
@@ -96,5 +97,4 @@ E2Eテストの作成を自動化してくれる便利なツールが最近増�
 * [質とスピード](https://speakerdeck.com/twada/quality-and-speed-2022-spring-edition)
 * [テスト駆動開発の過去・現在・未来 / History of TDD - XPJUG 2018 Keynote](https://speakerdeck.com/twada/history-of-tdd-xpjug-2018-keynote?slide=60)
 * 書籍：ソフトウェア品質を高める開発者テスト 改訂版 アジャイル時代の実践的・効率的でスムーズなテストのやり方
-* 
 
