@@ -38,7 +38,8 @@
     - 受け入れテストを媒体としてアジャイル開発の計画を行うプラクティスは、一部ではATDP（AcceptanceTestDrivenPlanning）と呼ばれていて取り込んだ
     * kent beck氏が提唱したテスト駆動開発は開発者のための補助輪という位置付けなので目的が異なる
 ## 課題3
-
+* [プロダクトコード](https://github.com/motikoma/praha-challenge-templates/tree/master/jestSample/fourArithmeticOperations)
+* [テスト](https://github.com/motikoma/praha-challenge-templates/tree/master/jestSample/__tests__)
 
 
 参考書籍
