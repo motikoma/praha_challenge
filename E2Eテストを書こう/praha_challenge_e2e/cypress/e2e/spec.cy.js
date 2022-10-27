@@ -1,6 +1,6 @@
 describe('マルバツゲームの勝敗判定', () => {
   it('片方のプレイヤーが勝つと勝利メッセージが表示される', () => {
-    cy.visit('http://localhost:3001')
+    cy.visit('http://localhost:3000')
     cy.get('[data-e2e="square-0"]').click()
     cy.get('[data-e2e="square-4"]').click()
     cy.get('[data-e2e="square-1"]').click()
@@ -10,7 +10,7 @@ describe('マルバツゲームの勝敗判定', () => {
   })
 
   it('勝敗がつかないと引き分けメッセージが表示される', () => {
-    cy.visit('http://localhost:3001')
+    cy.visit('http://localhost:3000')
     cy.get('[data-e2e="square-0"]').click()
     cy.get('[data-e2e="square-3"]').click()
     cy.get('[data-e2e="square-1"]').click()
