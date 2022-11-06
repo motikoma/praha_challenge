@@ -41,4 +41,24 @@
 * 参考：[よくわかるSOLID原則5: 依存性逆転の原則)](https://note.com/erukiti/n/n913e571e8207)
 
 ### デメテルの法則
-TDOO
+* オブジェクトAがオブジェクトBを「経由して」さらに別のオブジェクトCのサービスを要求してはならない。
+* これが望ましくないのは、オブジェクトAがオブジェクトBに対して、オブジェクトB自身の内部構造以上の知識を要求してしまうためである。
+* このような場合には、クラスBを変更し、クラスAがクラスBに対して行った要求を適切なBのサブコンポーネントに伝播させるようにすればよい。または、AがCへのリファレンスを持つようにして、AがCを直接呼ぶようにしてもよい。この法則に従えば、オブジェクトBが知っているのは自分自身の内部構造だけになる
+* 実践することでオブジェクトが他のオブジェクトの内部構造に依存することが少なくなるため、内部構造を呼び出し側の変更なしに修正することができる。
+* (サンプルコードに対する所感)[https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKCuAnYALSBTaBvAsAKGmgAdEBLANzABdMB9eCdRASQBMAuaCKsgOwHN8hEhWp0SAe1bxgVNp259BBaMAm9FMqhMQAKBk3lcepAQBpiiKVqOLT-AJTYhhV1RSkIAOnqMWraABeaAN-F1dod08fSWlZNiDLa3jWFwBffBcAeizoQAbTQC65QBgGQGUGQDEGQBCGQGMGQDMGfnQqGkQsxkamQCSGQCztQEr-QHUGGsAhBkAlBkAYhkAHBkBxhkBDhkAJhkBrhkA7BkBVm0BxJUBrBkB7BkBVBMBZ5V7APwZAbQZAZIZACIZAWwZAQH-AWAYXIngAIxBSYGh6qhC-Nl0nXBUIxANJC8SIeby+QypFQZFT3J4vLgNT6Q3SkVi-cJuME+UIJYJo9J3R7PV7vJJxOSsH7Of6uQFUYGg6K0WI2KGEGHCYkI1rktmo9E0iKEKLg1kpRIE6H4NJAA]
+    * Purchaseの持つuserId,productIdに対する処理を呼び出す側に実装する形式になっているので、呼び出し側がPurchaseの内部構造に依存してしまっている。
+    * PurchaseがuserId,productIdに対して何らかの処理を加えた結果を呼び出し側が使用する形式に変更するべき。
+* 参考：[デメテルの法則)](https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%A1%E3%83%86%E3%83%AB%E3%81%AE%E6%B3%95%E5%89%87)
+
+## 課題2
+### サンプルコードに対する問題点
+* PurchaseServiceのpurchaseメソッドで「おひとりさま一品限定」を判定しているが、Repository側で判定すべき
+* デメリットであるビジネスロジックがインフラストラクチャ層に漏れている点については許容する
+### 検討アプローチ
+1. フロントエンド側に限定商品の情報を持つ
+    * フロントエンドをシンプルにしたいので、フロントエンド側に限定商品の情報を持ちたくないので却下
+2. 複数の「限定商品」に関するドメインオブジェクトを使い分ける
+    * 商品idを元にRepository経由で商品の制約条件を取得する
+    * 制約に応じてドメイン層のオブジェクトを変更する
+    * 商品の制約条件をデータベース上で表現する必要があるが組み合わせが無限にあってしんどい
+        * 例：1年間に3回しか購入できないなどをテーブルで表現することはできる
