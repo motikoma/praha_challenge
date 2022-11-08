@@ -45,10 +45,10 @@
 * これが望ましくないのは、オブジェクトAがオブジェクトBに対して、オブジェクトB自身の内部構造以上の知識を要求してしまうためである。
 * このような場合には、クラスBを変更し、クラスAがクラスBに対して行った要求を適切なBのサブコンポーネントに伝播させるようにすればよい。または、AがCへのリファレンスを持つようにして、AがCを直接呼ぶようにしてもよい。この法則に従えば、オブジェクトBが知っているのは自分自身の内部構造だけになる
 * 実践することでオブジェクトが他のオブジェクトの内部構造に依存することが少なくなるため、内部構造を呼び出し側の変更なしに修正することができる。
-* (サンプルコードに対する所感)[https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKCuAnYALSBTaBvAsAKGmgAdEBLANzABdMB9eCdRASQBMAuaCKsgOwHN8hEhWp0SAe1bxgVNp259BBaMAm9FMqhMQAKBk3lcepAQBpiiKVqOLT-AJTYhhV1RSkIAOnqMWraABeaAN-F1dod08fSWlZNiDLa3jWFwBffBcAeizoQAbTQC65QBgGQGUGQDEGQBCGQGMGQDMGfnQqGkQsxkamQCSGQCztQEr-QHUGGsAhBkAlBkAYhkAHBkBxhkBDhkAJhkBrhkA7BkBVm0BxJUBrBkB7BkBVBMBZ5V7APwZAbQZAZIZACIZAWwZAQH-AWAYXIngAIxBSYGh6qhC-Nl0nXBUIxANJC8SIeby+QypFQZFT3J4vLgNT6Q3SkVi-cJuME+UIJYJo9J3R7PV7vJJxOSsH7Of6uQFUYGg6K0WI2KGEGHCYkI1rktmo9E0iKEKLg1kpRIE6H4NJAA]
+* [サンプルコードに対する所感](https://www.typescriptlang.org/play?#code/MYGwhgzhAEAKCuAnYALSBTaBvAsAKGmgAdEBLANzABdMB9eCdRASQBMAuaCKsgOwHN8hEhWp0SAe1bxgVNp259BBaMAm9FMqhMQAKBk3lcepAQBpiiKVqOLT-AJTYhhV1RSkIAOnqMWraABeaAN-F1dod08fSWlZNiDLa3jWFwBffBcAeizoQAbTQC65QBgGQGUGQDEGQBCGQGMGQDMGfnQqGkQsxkamQCSGQCztQEr-QHUGGsAhBkAlBkAYhkAHBkBxhkBDhkAJhkBrhkA7BkBVm0BxJUBrBkB7BkBVBMBZ5V7APwZAbQZAZIZACIZAWwZAQH-AWAYXIngAIxBSYGh6qhC-Nl0nXBUIxANJC8SIeby+QypFQZFT3J4vLgNT6Q3SkVi-cJuME+UIJYJo9J3R7PV7vJJxOSsH7Of6uQFUYGg6K0WI2KGEGHCYkI1rktmo9E0iKEKLg1kpRIE6H4NJAA)
     * Purchaseの持つuserId,productIdに対する処理を呼び出す側に実装する形式になっているので、呼び出し側がPurchaseの内部構造に依存してしまっている。
     * PurchaseがuserId,productIdに対して何らかの処理を加えた結果を呼び出し側が使用する形式に変更するべき。
-* 参考：[デメテルの法則)](https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%A1%E3%83%86%E3%83%AB%E3%81%AE%E6%B3%95%E5%89%87)
+* 参考：[デメテルの法則](https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%A1%E3%83%86%E3%83%AB%E3%81%AE%E6%B3%95%E5%89%87)
 
 ## 課題2
 ### サンプルコードに対する問題点
@@ -61,5 +61,13 @@
 2. 複数の「限定商品」に関するドメインオブジェクトを使い分ける
     * 商品idを元にRepository経由で商品種別を取得する
     * 制約に応じてドメイン層のオブジェクトを変更する
-
 ## 課題3
+### サンプルコードに対する問題点
+* Personクラスのフィールドの値をsetter経由で変更できるので、Personクラスの内部構造が外部に漏れてしまっている点が問題
+* Personクラスのフィールドをprivateにして、setterを削除することで、Personクラスの内部構造を外部に漏らさないようにする
+* getterとsetterは他オブジェクトがフィールドの値を直接操作できてしまうという点でカプセル化が実現できていない
+* カプセル化：ソフトウェアを分割する際に関心毎にデータとそのデータを必要とする処理をまとめること。データ隠蔽と組み合わせることで完成する
+* データ隠蔽：外部からフィールドを直接操作できないようにすること
+## 任意課題
+* 実用上は下記のスライドを抑えておけばOK
+    - [オブジェクト指向のその前に-凝集度と結合度/Coheision-Coupling](https://speakerdeck.com/sonatard/coheision-coupling)
