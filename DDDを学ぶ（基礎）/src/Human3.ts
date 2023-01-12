@@ -18,7 +18,7 @@ class Human3 extends ValueObject<HumanProps>{
 /**
  * ドメイン知識が漏れている
  * 
- * バリューオブジェクトにビジネスロジックが書かれていない
+ * ドメインモデル貧血症: バリューオブジェクトにビジネスロジックが書かれていない
  * ユースケースにビジネスロジックが漏れている
  */
 class postHumanUseCase {
