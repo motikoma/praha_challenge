@@ -41,3 +41,97 @@
     　- https://www.bravesoft.co.jp/blog/archives/10517
 
 # 課題 2（実装）
+- 元のクエリの実行時間: 878ms
+- indexを貼る
+  - CREATE INDEX last_name_index ON employees (last_name);
+- インデックスを貼った後のクエリの実行時間: 13ms
+- クエリを繰り返す場合、実行時間が短縮されていく理由
+  - データベースがクエリを実行する際に、キャッシュやバッファなどの仕組みを利用して、ディスクからデータを読み込む回数を減らすため
+
+# 課題3（実装）
+実行に20秒程度かかるクエリ
+```
+SELECT emp.last_name, SUM(sal.salary) sum
+FROM employees.employees emp
+INNER JOIN employees.salaries sal
+ON emp.emp_no = sal.emp_no
+GROUP BY emp.last_name
+HAVING sum =
+(
+    -- 最大値
+    SELECT MAX(tmp.tmp_sum)
+    FROM
+    (
+        -- last_nameごとのsalaryのsumを計算
+        SELECT SUM(sal2.salary) tmp_sum
+        FROM employees.employees emp2
+        INNER JOIN employees.salaries sal2
+        ON emp2.emp_no = sal2.emp_no
+        GROUP BY emp2.last_name
+    ) tmp
+);
+```
+
+実行計画
+```
+id|select_type|table     |partitions|type|possible_keys     |key    |key_len|ref                  |rows   |filtered|Extra                          |
+--+-----------+----------+----------+----+------------------+-------+-------+---------------------+-------+--------+-------------------------------+
+ 1|PRIMARY    |emp       |          |ALL |PRIMARY           |       |       |                     | 299246|   100.0|Using temporary; Using filesort|
+ 1|PRIMARY    |sal       |          |ref |PRIMARY,idx_salary|PRIMARY|4      |employees.emp.emp_no |      9|   100.0|                               |
+ 2|SUBQUERY   |<derived3>|          |ALL |                  |       |       |                     |2778295|   100.0|                               |
+ 3|DERIVED    |emp2      |          |ALL |PRIMARY           |       |       |                     | 299246|   100.0|Using temporary; Using filesort|
+ 3|DERIVED    |sal2      |          |ref |PRIMARY,idx_salary|PRIMARY|4      |employees.emp2.emp_no|      9|   100.0|                               |
+```
+
+GROUP BYで使用している条件にインデックスを作成
+```
+CREATE INDEX employee_lastname ON employees.employees(last_name);
+```
+
+実行計画
+```
+id|select_type|table     |partitions|type |possible_keys                      |key              |key_len|ref                  |rows   |filtered|Extra      |
+--+-----------+----------+----------+-----+-----------------------------------+-----------------+-------+---------------------+-------+--------+-----------+
+ 1|PRIMARY    |emp       |          |index|PRIMARY,employee_lastname          |employee_lastname|18     |                     | 299246|   100.0|Using index|
+ 1|PRIMARY    |sal       |          |ref  |PRIMARY,idx_salary,employees_salary|PRIMARY          |4      |employees.emp.emp_no |      9|   100.0|           |
+ 2|SUBQUERY   |<derived3>|          |ALL  |                                   |                 |       |                     |2778295|   100.0|           |
+ 3|DERIVED    |emp2      |          |index|PRIMARY,employee_lastname          |employee_lastname|18     |                     | 299246|   100.0|Using index|
+ 3|DERIVED    |sal2      |          |ref  |PRIMARY,idx_salary,employees_salary|PRIMARY          |4      |employees.emp2.emp_no|      9|   100.0|           |
+```
+
+インデックスを貼った結果、実行時間が16秒程度に変わった。
+
+### ORDER BYを絡めると高速化を達成しやすい理由
+- ORDER BYを含むクエリでは、ソートするカラムにインデックスを追加することで、ソート処理を高速化することができる可能性がある
+- また、WHERE句で絞り込まれるカラムも複合インデックスに含めることで、クエリの実行速度を高速化することができる可能性がある
+
+### SHOW INDEXESした際に表示されるcardinalityが0になっている状態
+- cardinality が 0 になっている状態とは、インデックスの一意な値がないことを意味する。つまりインデックスが効かない状態となる。
+```
+CREATE TABLE employees (
+  id INT PRIMARY KEY,
+  name VARCHAR(50),
+  age INT
+);
+
+INSERT INTO employees (id, name, age) VALUES (1, 'Alice', 30);
+INSERT INTO employees (id, name, age) VALUES (2, 'Bob', 30);
+INSERT INTO employees (id, name, age) VALUES (3, 'Charlie', 30);
+
+-- この時点で `age` 列の値がすべて 30 。`age` 列にインデックスがある場合、`cardinality` は 0 。
+```
+
+# 課題4
+### 複合indexに対する説明
+- 複合インデックスは、データベースで複数の列を1つのインデックスに組み合わせたもの。これを理解するために、本を並べた本棚を例にしてみましょう。
+- 本棚にはたくさんの本があり、それぞれ著者とジャンルが異なります。本を探すために、まず著者で並べ、次にジャンルで並べると、探しやすくなりますね。これが複合インデックスの基本的な考え方です。
+- この場合、著者とジャンルがインデックスの列になります。
+- データベースでは、複合インデックスを使用すると、2つ以上の列を組み合わせてデータの検索やソートを効率的に行うことができます。例えば、first_nameとlast_nameの2つの列に対して複合インデッ-クスを作成すると、両方の列を使用したクエリが高速になります。
+- ただし、複合インデックスには順序があります。上の例では、最初にfirst_name、次にlast_nameが並びます。この順序によって、どのようなクエリが最適化されるかが決まります。例えば、first_nameだけを使ったクエリは高速化されますが、last_nameだけを使ったクエリは最適化されません。
+- 複合インデックスを使用する際は、よく使う列の組み合わせや順序に注意して作成し、データベースのパフォーマンスを向上させることができます。
+
+### 姓名を合わせた検索、あるいは姓だけの検索が多い場合のインデックス
+- 下記ではfirst_nameだけで検索する際にindexは効くが、last_nameだけで検索する際にはindexが効かない。
+  - CREATE INDEX employees_name ON employees (first_name, last_name)
+- last_nameだけで検索する際にindexが効くようにするには、下記のようにインデックスを作成する。
+  - CREATE INDEX employees_name ON employees (last_name, first_name)
