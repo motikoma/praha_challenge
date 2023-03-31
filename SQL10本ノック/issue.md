@@ -82,7 +82,7 @@ group by Country, year_only
 ## Employee テーブルに「Junior（若手）」カラム（boolean）を追加
 
 ```
-ALTER TABLE Employees add column Junior;
+ALTER TABLE Employees add column Junior Boolean;
 
 update Employees
 set Junior = true
