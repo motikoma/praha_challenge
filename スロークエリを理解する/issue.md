@@ -45,7 +45,7 @@ SELECT DISTINCT title FROM employees.titles ORDER BY title;
 このコマンドは、実行回数が多い順（-s r）で上位 1 件（-t 1）のスロークエリを表示します。
 
 ```
-mysqldumpslow -s r -t 1 /path/to/slow-query.log
+mysqldumpslow -s c -t 1 /path/to/slow-query.log
 ```
 
 実行時間が最も長いクエリ
@@ -98,4 +98,8 @@ index を使ってうまく高速化できず...
 
 # 課題 6
 
+<<<<<<< Updated upstream
 - n+1 問題とはなんでしょうか？それを回避する方法を普段お使いのライブラリやフレームワークを踏まえて説明してください。
+=======
+n+1 問題とはなんでしょうか？それを回避する方法を普段お使いのライブラリやフレームワークを踏まえて説明してください。
+>>>>>>> Stashed changes
