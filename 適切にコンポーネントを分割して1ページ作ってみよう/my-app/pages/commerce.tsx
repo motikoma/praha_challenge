@@ -1,15 +1,9 @@
-import { GlobalNavigation } from "@/components/GlobalNavigation";
-import { Logo } from "../components/atoms/Logo";
+import { Header } from "@/components/organisms/header";
 
 export default function Commerce() {
   return (
     <main>
-      <header className='flex py-4 px-6'>
-        <div className='mr-4'>
-          <Logo />
-        </div>
-        <GlobalNavigation />
-      </header>
+      <Header />
     </main>
   );
 }
