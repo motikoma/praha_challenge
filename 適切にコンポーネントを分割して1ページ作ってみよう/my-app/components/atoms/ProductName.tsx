@@ -3,5 +3,5 @@ type Props = {
 };
 
 export const ProductName = ({ name }: Props) => {
-  return <p className='py-3 pl-5 font-semibold'>{name}</p>;
+  return <h3 className='py-3 pl-5 font-semibold text-3xl'>{name}</h3>;
 };
