@@ -1,3 +1,4 @@
+import { Carousel } from "@/components/organisms/Carousel";
 import { Header } from "@/components/organisms/Header";
 import { ProductList } from "@/components/organisms/ProductList";
 
@@ -25,6 +26,7 @@ export default function Commerce() {
       <Header />
       <main>
         <ProductList data={dummyData} />
+        <Carousel />
       </main>
     </>
   );
