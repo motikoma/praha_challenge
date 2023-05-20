@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-export const LogoIcon = () => {
+export const GithubIcon = () => {
   return (
     <Link href='/'>
-      <Image src='/logo.svg' alt='Acme Store' width={32} height={32} />
+      <Image src='/github.svg' alt='github' width={24} height={24} />
     </Link>
   );
 };
