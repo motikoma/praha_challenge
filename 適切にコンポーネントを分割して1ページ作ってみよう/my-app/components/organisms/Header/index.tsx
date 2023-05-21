@@ -1,7 +1,7 @@
-import { GlobalNavigation } from "../../molecures/GlobalNavigation";
+import { GlobalNavigation } from "../../molecures/globalNavigation";
 import { LogoIcon } from "../../atoms/logoIcon";
 import { CartIcon } from "../../atoms/cartIcon";
-import { SearchForm } from "../../molecures/SearchForm";
+import { SearchForm } from "../../molecures/searchForm";
 
 export const Header = () => {
   return (

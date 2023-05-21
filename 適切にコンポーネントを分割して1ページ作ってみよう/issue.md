@@ -69,3 +69,11 @@ functionComponent
 ## 課題 2
 
 ### https://demo.vercel.store/ の模写
+
+- my-app にて実装
+
+### 「position: absolute は使わない方が良い理由
+
+- position: absolute は、親要素の position: relative に対して相対的に配置される。
+- レスポンシブデザインでは、画面の幅や高さが変化するため、要素を固定の位置に配置するとデバイスや画面サイズによってはコンテンツが切れたり、適切に表示されなかったりする可能性がある
+- ただし、レイアウトに影響がない場合はその限りではないと考える。

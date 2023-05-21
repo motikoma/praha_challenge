@@ -1,11 +1,9 @@
-import { Carousel } from "@/components/organisms/carousel";
-import { useModal } from "@/components/organisms/cokkiePolicyModal";
-import { Footer } from "@/components/organisms/footer";
-import { Header } from "@/components/organisms/header";
-import { ProductList } from "@/components/organisms/productList";
-import { useEffect } from "react";
+import { Carousel } from "../../organisms/carousel";
+import { Footer } from "../../organisms/footer";
+import { Header } from "../../organisms/header";
+import { ProductList } from "../../organisms/productList";
 
-export default function Commerce() {
+export const Commerce = () => {
   const dummyData = [
     {
       name: "Product 1",
@@ -63,21 +61,14 @@ export default function Commerce() {
     },
   ];
 
-  const { Modal, openModal } = useModal();
-
-  useEffect(() => {
-    openModal();
-  }, []);
-
   return (
-    <div className='relative'>
+    <>
       <Header />
       <main>
         <ProductList data={dummyData} />
         <Carousel data={dummyDataForCarousel} />
       </main>
       <Footer />
-      <Modal />
-    </div>
+    </>
   );
-}
+};
