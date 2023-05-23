@@ -77,3 +77,25 @@ functionComponent
 - position: absolute は、親要素の position: relative に対して相対的に配置される。
 - レスポンシブデザインでは、画面の幅や高さが変化するため、要素を固定の位置に配置するとデバイスや画面サイズによってはコンテンツが切れたり、適切に表示されなかったりする可能性がある
 - ただし、レイアウトに影響がない場合はその限りではないと考える。
+
+## 課題 3
+
+### より大きく複雑なサービスの開発に atomic design を取り入れた際に起きうる問題点
+
+- molecules, organisms の違いについてチーム内で認識を合わせるのが大変
+- atoms, molecules に関してユースケースが異なる場合でも１つのコンポーネントで対応できるようにしてしまった場合、コンポーネントのロジックが複雑になる
+- 参考情報
+  - https://zenn.dev/takepepe/articles/6978c067faab9e7d33c2
+
+### アトミックデザインに代わるディレクトリ構造を考えてみてください
+
+コンポーネントの分類を依存の単位から行う
+
+- atoms: state を持たない
+- molecules: local state を持つ
+- organisms: global state を持つ
+- pages: API との接続処理に依存する
+
+参考情報
+
+- https://zenn.dev/takepepe/articles/atomic-redesign
