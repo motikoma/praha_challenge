@@ -1,4 +1,4 @@
-import { Product } from "../../molecures/product";
+import { Product } from "../../molecures/Product";
 
 type Props = {
   data: {

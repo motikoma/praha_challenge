@@ -1,15 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { GithubIcon } from ".";
+import { SideNavIcon } from ".";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta: Meta<typeof GithubIcon> = {
-  title: "Example/GithubIcon",
-  component: GithubIcon,
+const meta: Meta<typeof SideNavIcon> = {
+  title: "Example/SideNavIcon",
+  component: SideNavIcon,
   tags: ["autodocs"],
 };
 
 export default meta;
-type Story = StoryObj<typeof GithubIcon>;
+type Story = StoryObj<typeof SideNavIcon>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    name: "SideNavIcon",
+  },
+};

@@ -1,6 +1,6 @@
-import { VercelIcon } from "../../atoms/vercelIcon";
-import { GithubIcon } from "../../atoms/githubIcon";
-import { LogoIcon } from "../../atoms/logoIcon";
+import { VercelIcon } from "../../atoms/VercelIcon";
+import { GithubIcon } from "../../atoms/GithubIcon";
+import { LogoIcon } from "../../atoms/LogoIcon";
 import Link from "next/link";
 
 export const Footer = () => {
@@ -20,22 +20,22 @@ export const Footer = () => {
           </div>
           <div className='col-span-1 lg:col-span-7'>
             <ul className='grid md:grid-flow-col md:grid-cols-3 md:grid-rows-4'>
-              <li className='pb-3'>
+              <li className='py-3 md:py-0 md:pb-3'>
                 <Link href={"/"}>Home</Link>
               </li>
-              <li className='pb-3'>
+              <li className='py-3 md:py-0 md:pb-3'>
                 <Link href={"/"}>About</Link>
               </li>
-              <li className='pb-3'>
+              <li className='py-3 md:py-0 md:pb-3'>
                 <Link href={"/"}>Terms & Conditions</Link>
               </li>
-              <li className='pb-3'>
+              <li className='py-3 md:py-0 md:pb-3'>
                 <Link href={"/"}>Shippings ＆ Return Policy</Link>
               </li>
-              <li className='pb-3'>
+              <li className='py-3 md:py-0 md:pb-3'>
                 <Link href={"/"}>Privacy Policy</Link>
               </li>
-              <li className='pb-3'>
+              <li className='py-3 md:py-0 md:pb-3'>
                 <Link href={"/"}>FAQ</Link>
               </li>
             </ul>

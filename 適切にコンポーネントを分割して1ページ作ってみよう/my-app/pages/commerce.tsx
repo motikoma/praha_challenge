@@ -1,8 +1,8 @@
-import { Carousel } from "@/components/organisms/carousel";
-import { useModal } from "@/components/organisms/cokkiePolicyModal";
-import { Footer } from "@/components/organisms/footer";
-import { Header } from "@/components/organisms/header";
-import { ProductList } from "@/components/organisms/productList";
+import { Carousel } from "../components/organisms/Carousel";
+import { useModal } from "../components/organisms/CokkiePolicyModal";
+import { Footer } from "../components/organisms/Footer";
+import { ProductList } from "../components/organisms/ProductList";
+import { Header } from "../components/organisms/Header";
 import { useEffect } from "react";
 
 export default function Commerce() {

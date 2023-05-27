@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Price } from "../../atoms/price";
-import { ProductName } from "../../atoms/productName";
+import { Price } from "../../atoms/Price";
+import { ProductName } from "../../atoms/ProductName";
 
 type Props = {
   name: string;

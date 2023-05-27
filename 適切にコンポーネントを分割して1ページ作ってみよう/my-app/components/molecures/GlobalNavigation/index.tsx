@@ -24,7 +24,7 @@ type ListProps = {
 
 const List = ({ text, url }: ListProps) => {
   return (
-    <li className='px-2 py-1 rounded-lg text-gray-800 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400'>
+    <li className='px-2 py-1 text-gray-800 rounded-lg hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400'>
       <Link href={url}>{text}</Link>
     </li>
   );

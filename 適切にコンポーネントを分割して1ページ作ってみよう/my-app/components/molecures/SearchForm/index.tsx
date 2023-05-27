@@ -14,7 +14,7 @@ export const SearchForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='relative items-center border border-gray-200 bg-transparent p-0 dark:border-gray-500'
+      className='relative items-center p-0 bg-transparent border border-gray-200 dark:border-gray-500'
     >
       <input
         type='text'
@@ -25,7 +25,7 @@ export const SearchForm = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div className='absolute right-0 top-0 mr-3 flex h-full items-center'>
+      <div className='absolute top-0 right-0 flex items-center h-full mr-3'>
         <Image
           className='h-5'
           src='/search.svg'
