@@ -1,0 +1,30 @@
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
+}
+
+.small {
+  width: 100px;
+  height: 80px;
+}
+
+.medium {
+  width: 200px;
+  height: 160px;
+}
+
+.large {
+  width: 400px;
+  height: 320px;
+}
+
+.disabled {
+  background-color: gray;
+}
