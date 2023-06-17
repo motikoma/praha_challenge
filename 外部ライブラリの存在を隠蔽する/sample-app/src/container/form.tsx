@@ -4,13 +4,10 @@ import { Email } from "../components/email";
 import { Telephone } from "../components/telephone";
 import { Title } from "../components/title";
 import { RadioButton } from "../components/radioButton";
+import { useFormHandler } from "@/hooks/useFormHandler";
 
 export const Form = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, errors } = useFormHandler();
   const onSubmit = (data: any) => {
     window.alert(JSON.stringify(data));
   };
@@ -24,41 +21,19 @@ export const Form = () => {
         max={2}
         min={1}
         maxLength={80}
-        register={register}
       />
-      <Text
-        placeholder='Last name'
-        required={true}
-        maxLength={100}
-        register={register}
-      />
-      <Email
-        placeholder='Email'
-        required={true}
-        pattern='/^\S+@\S+$/i'
-        register={register}
-      />
+      <Text placeholder='Last name' required={true} maxLength={100} />
+      <Email placeholder='Email' required={true} pattern={/^\S+@\S+$/i} />
       <Telephone
         placeholder='Mobile number'
         required={true}
         minLength={6}
         maxLength={12}
-        register={register}
       />
-      <Title name='Title' required={true} register={register} />
+      <Title name='Title' required={true} />
 
-      <RadioButton
-        name='Developer'
-        required={true}
-        value='Yes'
-        register={register}
-      />
-      <RadioButton
-        name='Developer'
-        required={true}
-        value='No'
-        register={register}
-      />
+      <RadioButton name='Developer' required={true} value='Yes' />
+      <RadioButton name='Developer' required={true} value='No' />
 
       <input type='submit' />
     </form>

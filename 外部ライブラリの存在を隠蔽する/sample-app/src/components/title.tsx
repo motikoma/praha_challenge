@@ -1,11 +1,13 @@
+import { useFormHandler } from "@/hooks/useFormHandler";
+
 type Props = {
   name: string;
   required: boolean;
-  register: (...args: any[]) => any; // ライブラリの型定義に依存しない代わりに型の恩恵を受けられない
 };
 
 export const Title = (props: Props) => {
-  const { name, register, required } = props;
+  const { name, required } = props;
+  const { register } = useFormHandler();
 
   return (
     <select {...register(name, { required })} className='text-black'>

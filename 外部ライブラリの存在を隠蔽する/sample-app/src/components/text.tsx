@@ -1,14 +1,16 @@
+import { useFormHandler } from "@/hooks/useFormHandler";
+
 type Props = {
   placeholder: string;
   required: boolean;
   max?: number;
   min?: number;
   maxLength: number;
-  register: (...args: any[]) => any; // ライブラリの型定義に依存しない代わりに型の恩恵を受けられない
 };
 
 export const Text = (props: Props) => {
-  const { placeholder, register, required, max, min, maxLength } = props;
+  const { placeholder, required, max, min, maxLength } = props;
+  const { register } = useFormHandler();
 
   if (max && min) {
     return (
