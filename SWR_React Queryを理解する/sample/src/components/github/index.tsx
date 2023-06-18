@@ -1,4 +1,4 @@
-import { fetcher } from "@/fetcher";
+import { fetcher } from "../../fetcher";
 import useSWR from "swr";
 
 interface RepoData {
