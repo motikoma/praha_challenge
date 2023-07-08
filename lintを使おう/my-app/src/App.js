@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 const hoge = "hoge";
-hoge = "fuga";
+hoge = "hoge";
 
 function App() {
   return (
