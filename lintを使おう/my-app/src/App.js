@@ -1,9 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-const hoge = "hoge";
-hoge = "hoge";
-
 function App() {
   return (
     <div className='App'>
