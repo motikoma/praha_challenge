@@ -27,7 +27,7 @@ export default function Home() {
               className='dark:invert'
               width={100}
               height={24}
-              priority
+              // priority
             />
           </a>
         </div>
