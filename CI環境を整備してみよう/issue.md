@@ -5,7 +5,8 @@
 
 # 課題 2（実装）
 
-別プルリクで実装予定
+下記プルリクで挙動を確認可能
+https://github.com/motikoma/praha-challenge-ddd/pull/6
 
 # 課題 3（実装）
 
