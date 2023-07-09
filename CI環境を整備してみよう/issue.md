@@ -1,6 +1,7 @@
 # 課題 1（実装）
 
-本課題のプルリクで GithubAction が実行されていることを確認できる
+- .github/workflows/lint.yaml 参照
+- 本課題のプルリクで GithubAction が実行されていることを確認できる
 
 # 課題 2（実装）
 
@@ -89,3 +90,80 @@ YOUR_GITHUB_TOKEN はあなたの GitHub のトークンを指す
 この設定により、CMS の更新が行われると repository_dispatch イベントが発生し、GitHub Actions のワークフローが起動する
 
 ### 特定のディレクトリ配下が変更された時のみワークフローを実行する方法
+
+下記のように記述することで、特定のディレクトリ配下が変更された時のみワークフローを実行することができる
+
+```
+on:
+  pull_request:
+    paths:
+      - "CI環境を整備してみよう/**"
+```
+
+### 特定の job が他の job の完了を待ってから 実行されるように設定する方法
+
+GitHub Actions では、ワークフロー内の特定のジョブが他のジョブの完了を待つように設定するために、needs キーワードを使用する
+needs キーワードの後には、そのジョブが依存するジョブの名前を指定する
+
+```
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run a script
+        run: echo "This is job 1"
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run a script
+        run: echo "This is job 2, it runs after job 1"
+```
+
+複数のジョブを指定することも可能。例えば、job3 が job1 と job2 の両方の完了を待つようにするには、次のように設定する
+
+```
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a script
+        run: echo "This is job 1"
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a script
+        run: echo "This is job 2"
+
+  job3:
+    needs: [job1, job2]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a script
+        run: echo "This is job 3, it runs after job 1 and job 2"
+```
+
+### 秘匿性の高い環境変数を yml ファイルの中で扱う方法
+
+GitHub Actions では、秘密の値（秘密鍵、アクセストークン、パスワードなど）を安全に管理するために、秘密 (secrets) を使う
+これは、リポジトリまたは組織レベルで設定でき、ワークフローファイル内では秘密の名前で参照できる
+秘密はリポジトリの設定ページから設定できる。以下の手順で設定できる。
+ワークフローファイル内で秘密を参照するには、secrets コンテキストを使用する
+
+```
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use secret
+        run: echo "My secret is ${{ secrets.MY_SECRET }}"
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+
+```
