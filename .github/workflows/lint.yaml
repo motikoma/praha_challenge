@@ -23,7 +23,7 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: npm ci
+        run: cd CI環境を整備してみよう/my-next-app && npm ci
 
       - name: Run lint
-        run: npm run lint
+        run: cd CI環境を整備してみよう/my-next-app && npm run lint
