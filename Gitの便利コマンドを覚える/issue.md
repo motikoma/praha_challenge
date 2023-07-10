@@ -29,7 +29,7 @@ git rebase -i HEAD~4
 
 git checkout -b new-branch existing-branch
 
-## リモートリポジトリをクローンする際に全てのコミット履歴が必要なく、最新コミットだけクローンしたい（clone にかかる時間を短縮するのに役立ちます）
+## リモートリポジトリをクローンする際に全てのコミット履歴が必要なく、最新コミットだけクローンしたい
 
 git clone --depth 1 <repository_url>
 
