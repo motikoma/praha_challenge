@@ -20,7 +20,18 @@ export default function Login() {
   };
 
   const handleFetch = async () => {
-    const res = await fetch("/api/hello");
+    const auth = getAuth();
+    const token = await auth.currentUser?.getIdTokenResult();
+    const requestToken = token?.token;
+
+    const res = await fetch("/api/hello", {
+      method: "GET",
+      headers: {
+        mode: "cors",
+        Authorization: `Bearer ${requestToken}`,
+        "Content-Type": "application/json",
+      },
+    });
     const json = await res.json();
     console.log(json);
   };

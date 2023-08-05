@@ -4,7 +4,7 @@ import {
   UserCredential,
   signOut,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth } from "./firebaseClient";
 
 export const login = (): Promise<UserCredential> => {
   const provider = new GoogleAuthProvider();
