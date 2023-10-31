@@ -29,11 +29,17 @@ order by count(Orders.CustomerID) desc
 ## 過去最も多くの OrderDetail が紐づいた Order を取得
 
 ```
-SELECT Orders.OrderID, count(OrderDetails.OrderID) as OrderDetailsCount FROM Orders
-left join OrderDetails
-on OrderDetails.OrderID = Orders.OrderID
-group by OrderDetails.OrderID
-order by OrderDetailsCount desc;
+SELECT OrderID, Count(OrderDetailID) AS OrderDetailCount
+FROM OrderDetails
+GROUP BY OrderID
+having OrderDetailCount = (
+	select Max(OrderDetailCount)
+    from (
+    	select OrderID, count(OrderID) as OrderDetailCount
+        from OrderDetails
+        group by OrderID
+    )
+)
 ```
 
 ## Order 数が多い順番に Shipper の id を並べてください。Order 数も表示してください
@@ -76,7 +82,7 @@ group by Country, year_only
 ## Employee テーブルに「Junior（若手）」カラム（boolean）を追加
 
 ```
-ALTER TABLE Employees add column Junior Boolean default false;
+ALTER TABLE Employees add column Junior Boolean;
 
 update Employees
 set Junior = true
